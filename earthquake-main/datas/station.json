@@ -1,0 +1,857 @@
+[
+  {
+    "nama_stasiun":"ABSM",
+    "Latitude":-3.4254,
+    "Longitude":102.26295,
+    "Depth":-0.38,
+    "Kecamatan":"Argamakmur",
+    "Kabupaten":"Bengkulu Utara",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"APSR",
+    "Latitude":-0.89539,
+    "Longitude":100.34677,
+    "Depth":0.0,
+    "Kecamatan":"Unp-Padang",
+    "Kabupaten":"Padang",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"APSSI",
+    "Latitude":-3.932,
+    "Longitude":102.465,
+    "Depth":-0.226,
+    "Kecamatan":"Talang Alai",
+    "Kabupaten":"Seluma",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"BKASI",
+    "Latitude":-0.202,
+    "Longitude":100.318,
+    "Depth":-0.853,
+    "Kecamatan":"Baringin",
+    "Kabupaten":"Agam",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"BKNI",
+    "Latitude":0.3262,
+    "Longitude":101.0396,
+    "Depth":-0.065,
+    "Kecamatan":"Bangkinang",
+    "Kabupaten":"Kampar",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"BLSM",
+    "Latitude":-3.140218,
+    "Longitude":102.8072,
+    "Depth":-0.067,
+    "Kecamatan":"Batukuning Lakitan Ulu",
+    "Kabupaten":"Musi Rawas",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"BMSI",
+    "Latitude":-2.06641,
+    "Longitude":102.31544,
+    "Depth":-0.135,
+    "Kecamatan":"Bangko",
+    "Kabupaten":"Merangin",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"BOSM",
+    "Latitude":-4.859183,
+    "Longitude":104.020736,
+    "Depth":-0.64,
+    "Kecamatan":"Banding Agung",
+    "Kabupaten":"Ogan Komering Ulu Selatan",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"BPSM",
+    "Latitude":-1.1924,
+    "Longitude":100.58998,
+    "Depth":-0.11,
+    "Kecamatan":"Bayang",
+    "Kabupaten":"Pesisir Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"BTSR",
+    "Latitude":-3.81942,
+    "Longitude":102.29994,
+    "Depth":-0.028,
+    "Kecamatan":"Bengkulu",
+    "Kabupaten":"Bengkulu Tengah",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"DDSI",
+    "Latitude":1.6675,
+    "Longitude":101.4602,
+    "Depth":-0.076,
+    "Kecamatan":"Dumai Timur",
+    "Kabupaten":"Dumai",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"EGSI",
+    "Latitude":-5.3526,
+    "Longitude":102.2767,
+    "Depth":-0.03573,
+    "Kecamatan":"Enggano",
+    "Kabupaten":"Bengkulu Utara",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"GSI",
+    "Latitude":1.3039,
+    "Longitude":97.5755,
+    "Depth":-0.107,
+    "Kecamatan":"Gunung Sitoli",
+    "Kabupaten":"Nias",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"GTSI",
+    "Latitude":-0.5981,
+    "Longitude":101.4888,
+    "Depth":-0.009,
+    "Kecamatan":"Gunung Toar",
+    "Kabupaten":"Kuantan Singingi",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"HINSI",
+    "Latitude":-0.54,
+    "Longitude":98.499,
+    "Depth":-0.035,
+    "Kecamatan":"Hilioromao",
+    "Kabupaten":"Nias Selatan",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"IHRSI",
+    "Latitude":0.02,
+    "Longitude":103.17,
+    "Depth":0.0,
+    "Kecamatan":"Indragiri Hilir",
+    "Kabupaten":"Indragiri Hilir",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"JASI",
+    "Latitude":-1.41453,
+    "Longitude":101.45838,
+    "Depth":-0.253,
+    "Kecamatan":"Sangir Balai Janggo",
+    "Kabupaten":"Solok Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"JMBI",
+    "Latitude":-1.6764,
+    "Longitude":103.576,
+    "Depth":-0.0761,
+    "Kecamatan":"Jambi",
+    "Kabupaten":"Muaro Jambi",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"JMSI",
+    "Latitude":-2.63715,
+    "Longitude":101.88745,
+    "Depth":-1.275,
+    "Kecamatan":"Jangkat",
+    "Kabupaten":"Merangin",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"JPSI",
+    "Latitude":-1.34164,
+    "Longitude":100.58645,
+    "Depth":-0.038,
+    "Kecamatan":"Jurai",
+    "Kabupaten":"Pesisir Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"KRJI",
+    "Latitude":-2.0912,
+    "Longitude":101.4619,
+    "Depth":-0.81088,
+    "Kecamatan":"Kerinci",
+    "Kabupaten":"Kerinci",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"KSI",
+    "Latitude":-3.6517,
+    "Longitude":102.5929,
+    "Depth":-0.539,
+    "Kecamatan":"Kepahyang",
+    "Kabupaten":"Kepahiang",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"LBTSI",
+    "Latitude":-0.475,
+    "Longitude":100.625,
+    "Depth":-0.417,
+    "Kecamatan":"Pagaruyung",
+    "Kabupaten":"Tanah Datar",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"LHSM",
+    "Latitude":-4.177973,
+    "Longitude":103.574208,
+    "Depth":-1.494,
+    "Kecamatan":"Semendo",
+    "Kabupaten":"Lahat",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"LKSM",
+    "Latitude":0.1845,
+    "Longitude":100.6007,
+    "Depth":-0.186,
+    "Kecamatan":"Suliki",
+    "Kabupaten":"Lima Puluh Kota",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"LLSI",
+    "Latitude":-3.27843,
+    "Longitude":102.9139,
+    "Depth":-0.129,
+    "Kecamatan":"Lubuk Linggau Barat",
+    "Kabupaten":"Lubuk Linggau",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"LPSM",
+    "Latitude":-1.7082,
+    "Longitude":100.7196,
+    "Depth":-0.11,
+    "Kecamatan":"Lengayang",
+    "Kabupaten":"Pesisir Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"LTNSI",
+    "Latitude":1.336,
+    "Longitude":97.32,
+    "Depth":-0.052,
+    "Kecamatan":"Lukhu Lase",
+    "Kabupaten":"Nias Utara",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"LTSM",
+    "Latitude":1.52936,
+    "Longitude":98.9305,
+    "Depth":-0.005,
+    "Kecamatan":"Lumut",
+    "Kabupaten":"Tapanuli Tengah",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"LWLI",
+    "Latitude":-5.0175,
+    "Longitude":104.0589,
+    "Depth":-0.93805,
+    "Kecamatan":"Liwa",
+    "Kabupaten":"Lampung Barat",
+    "Provinsi":"Lampung"
+  },
+  {
+    "nama_stasiun":"MASI",
+    "Latitude":-3.1415,
+    "Longitude":102.2396,
+    "Depth":-0.3845,
+    "Kecamatan":"Muara Aman",
+    "Kabupaten":"Lebong",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"MBBI",
+    "Latitude":-1.5406,
+    "Longitude":102.0984,
+    "Depth":-0.113,
+    "Kecamatan":"Muara Bungo",
+    "Kabupaten":"Bungo",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"MBSM",
+    "Latitude":-3.1451,
+    "Longitude":101.8374,
+    "Depth":-0.037,
+    "Kecamatan":"Marga Sakti Seblat",
+    "Kabupaten":"Bengkulu Utara",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"MBSR",
+    "Latitude":-4.44095,
+    "Longitude":102.89383,
+    "Depth":-0.015,
+    "Kecamatan":"Manna",
+    "Kabupaten":"Bengkulu Selatan",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"MDSI",
+    "Latitude":-4.4861,
+    "Longitude":104.1783,
+    "Depth":-0.111,
+    "Kecamatan":"Muara Dua",
+    "Kabupaten":"Ogan Komering Ulu Selatan",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"MKBI",
+    "Latitude":-2.4474,
+    "Longitude":101.2396,
+    "Depth":-0.04821,
+    "Kecamatan":"Muko Muko",
+    "Kabupaten":"Mukomuko",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"MKSM",
+    "Latitude":-4.5288,
+    "Longitude":103.36,
+    "Depth":-0.3,
+    "Kecamatan":"Muara Sahung",
+    "Kabupaten":"Kaur",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"MNAI",
+    "Latitude":-4.3605,
+    "Longitude":102.9557,
+    "Depth":-0.154,
+    "Kecamatan":"Manna",
+    "Kabupaten":"Bengkulu Selatan",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"MNSI",
+    "Latitude":0.7955,
+    "Longitude":99.5796,
+    "Depth":-0.2944,
+    "Kecamatan":"Mandailing Natal",
+    "Kabupaten":"Mandailing Natal",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"MPSM",
+    "Latitude":0.5891,
+    "Longitude":100.1383,
+    "Depth":-0.195,
+    "Kecamatan":"Mapat Tunggul",
+    "Kabupaten":"Pasaman",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"MTSI",
+    "Latitude":2.1524,
+    "Longitude":98.2524,
+    "Depth":-0.008,
+    "Kecamatan":"Manduamas",
+    "Kabupaten":"Tapanuli Tengah",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"MTSM",
+    "Latitude":-4.4793,
+    "Longitude":103.5062,
+    "Depth":-0.803,
+    "Kecamatan":"Muara Dua",
+    "Kabupaten":"Ogan Komering Ulu Selatan",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"MUTSI",
+    "Latitude":2.3,
+    "Longitude":98.965,
+    "Depth":-1.571,
+    "Kecamatan":"Paranginan Selatan",
+    "Kabupaten":"Humbang Hasundutan",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"ONSM",
+    "Latitude":2.1599,
+    "Longitude":98.6301,
+    "Depth":-1.158,
+    "Kecamatan":"Onan Ganjang",
+    "Kabupaten":"Humbang Hasundutan",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"PABI",
+    "Latitude":0.1236,
+    "Longitude":99.8719,
+    "Depth":-0.155,
+    "Kecamatan":"Pasaman",
+    "Kabupaten":"Pasaman Barat",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PAGA",
+    "Latitude":-0.25,
+    "Longitude":100.382,
+    "Depth":0.0,
+    "Kecamatan":"Stasiun GAW Bukit Tinggi",
+    "Kabupaten":"Agam",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PAPA",
+    "Latitude":-0.466,
+    "Longitude":100.379,
+    "Depth":-0.726,
+    "Kecamatan":"Stasiun Geofisika Padang Panjang",
+    "Kabupaten":"Padang Panjang",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PASC",
+    "Latitude":-0.545,
+    "Longitude":100.29,
+    "Depth":-0.13,
+    "Kecamatan":"Stasiun Klimatologi Klas II Padang Pariaman",
+    "Kabupaten":"Padang Pariaman",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PASMI",
+    "Latitude":-2.9646,
+    "Longitude":100.2028,
+    "Depth":-0.039,
+    "Kecamatan":"Malakopa",
+    "Kabupaten":"Kepulauan Mentawai",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PBSI",
+    "Latitude":-0.0547,
+    "Longitude":98.28,
+    "Depth":-0.047,
+    "Kecamatan":"Pulau Batu",
+    "Kabupaten":"Nias Selatan",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"PDSI",
+    "Latitude":-0.9118,
+    "Longitude":100.4617,
+    "Depth":-0.2756,
+    "Kecamatan":"Padang",
+    "Kabupaten":"Padang",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PKSI",
+    "Latitude":-4.0428,
+    "Longitude":103.2639,
+    "Depth":-0.741,
+    "Kecamatan":"Pagar Alam Utara",
+    "Kabupaten":"Pagar Alam",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"PLSI",
+    "Latitude":0.23729,
+    "Longitude":100.55398,
+    "Depth":-0.133,
+    "Kecamatan":"Pangkalan Koto Baru",
+    "Kabupaten":"Lima Puluh Kota",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PLSM",
+    "Latitude":1.54,
+    "Longitude":99.6462,
+    "Depth":-0.088,
+    "Kecamatan":"Sosa",
+    "Kabupaten":"Padang Lawas Utara",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"PMBI",
+    "Latitude":-2.9024,
+    "Longitude":104.6993,
+    "Depth":-0.025,
+    "Kecamatan":"Palembang",
+    "Kabupaten":"Palembang",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"PPI",
+    "Latitude":-0.455476,
+    "Longitude":100.397217,
+    "Depth":-0.7836,
+    "Kecamatan":"Padang Panjang",
+    "Kabupaten":"Padang Panjang",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PPSI",
+    "Latitude":-2.766,
+    "Longitude":100.01,
+    "Depth":-0.006,
+    "Kecamatan":"Pulau Pagai",
+    "Kabupaten":"Kepulauan Mentawai",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PPSN",
+    "Latitude":-1.35,
+    "Longitude":100.579,
+    "Depth":-0.006,
+    "Kecamatan":"BPBD Painan",
+    "Kabupaten":"Pesisir Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PRSI",
+    "Latitude":0.37,
+    "Longitude":102.17,
+    "Depth":0.0,
+    "Kecamatan":"Pelalawan",
+    "Kabupaten":"Pelalawan",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"PRSN",
+    "Latitude":-0.7856,
+    "Longitude":100.3048,
+    "Depth":-0.016,
+    "Kecamatan":"Stasiun Meteorologi Minangkabau - Padang Pariaman",
+    "Kabupaten":"Padang Pariaman",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"PSSN",
+    "Latitude":1.5534,
+    "Longitude":98.8969,
+    "Depth":-0.006,
+    "Kecamatan":"Stasiun Meteorologi Pinang sori - Sibolga",
+    "Kabupaten":"Sibolga",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"PTSM",
+    "Latitude":2.011856,
+    "Longitude":99.166011,
+    "Depth":-1.196,
+    "Kecamatan":"Pangaribuan",
+    "Kabupaten":"Tapanuli Utara",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"RASM",
+    "Latitude":-2.1655,
+    "Longitude":101.0708,
+    "Depth":-0.1,
+    "Kecamatan":"Ranah Ampek Hulu Tapan",
+    "Kabupaten":"Pesisir Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"RGRI",
+    "Latitude":-0.3491,
+    "Longitude":102.3338,
+    "Depth":-0.04093,
+    "Kecamatan":"Rengat",
+    "Kabupaten":"Indragiri Hulu",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"RHRSI",
+    "Latitude":1.44,
+    "Longitude":100.51,
+    "Depth":0.0,
+    "Kecamatan":"Rokan Hilir",
+    "Kabupaten":"Rokan Hilir",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"RLSI",
+    "Latitude":2.0687,
+    "Longitude":99.8455,
+    "Depth":-0.029,
+    "Kecamatan":"Rantau Selatan",
+    "Kabupaten":"Labuhan Batu",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"RMSM",
+    "Latitude":-2.62326,
+    "Longitude":102.7617,
+    "Depth":-0.056,
+    "Kecamatan":"Rawas Hulu",
+    "Kabupaten":"Musi Rawas",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"RRHRI",
+    "Latitude":0.571374,
+    "Longitude":100.427397,
+    "Depth":-0.092,
+    "Kecamatan":"Rokan Hulu",
+    "Kabupaten":"Rokan hulu",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"RRSI",
+    "Latitude":0.84096,
+    "Longitude":100.34611,
+    "Depth":-0.078,
+    "Kecamatan":"Rambah",
+    "Kabupaten":"Rokan Hulu",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"SBSI",
+    "Latitude":1.3988,
+    "Longitude":99.431,
+    "Depth":-0.29151,
+    "Kecamatan":"Sibolga",
+    "Kabupaten":"Sibolga",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"SBSM",
+    "Latitude":0.1983,
+    "Longitude":99.3775,
+    "Depth":-0.001,
+    "Kecamatan":"Sungai Beremas",
+    "Kabupaten":"Pasaman",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SDSI",
+    "Latitude":-0.9325,
+    "Longitude":101.428,
+    "Depth":-0.21332,
+    "Kecamatan":"Sungai Dareh",
+    "Kabupaten":"Dharmasraya",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SIRSI",
+    "Latitude":0.86,
+    "Longitude":101.66,
+    "Depth":0.0,
+    "Kecamatan":"Siak",
+    "Kabupaten":"Siak",
+    "Provinsi":"Riau"
+  },
+  {
+    "nama_stasiun":"SISI",
+    "Latitude":-1.3265,
+    "Longitude":99.0895,
+    "Depth":-0.0472,
+    "Kecamatan":"Pulau Saibi",
+    "Kabupaten":"Kepulauan Mentawai",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SISMI",
+    "Latitude":-1.7806,
+    "Longitude":99.14018,
+    "Depth":-0.039,
+    "Kecamatan":"Siberut BaratDaya",
+    "Kabupaten":"Kepulauan Mentawai",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SIUMI",
+    "Latitude":-1.126,
+    "Longitude":98.98,
+    "Depth":-0.009,
+    "Kecamatan":"Siberut Utara",
+    "Kabupaten":"Kepulauan Mentawai",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SKSM",
+    "Latitude":-1.946,
+    "Longitude":101.3497,
+    "Depth":-0.956,
+    "Kecamatan":"Siulak Mukai",
+    "Kabupaten":"Kerinci",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"SLSI",
+    "Latitude":-2.3924,
+    "Longitude":102.5927,
+    "Depth":-0.07683,
+    "Kecamatan":"Sarolangun",
+    "Kabupaten":"Sarolangun",
+    "Provinsi":"Jambi"
+  },
+  {
+    "nama_stasiun":"SLSM",
+    "Latitude":-0.83132,
+    "Longitude":100.65342,
+    "Depth":-0.389,
+    "Kecamatan":"Sungai Lasi",
+    "Kabupaten":"Solok",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SMSM",
+    "Latitude":-0.005923,
+    "Longitude":100.17103,
+    "Depth":-0.361,
+    "Kecamatan":"Simpati",
+    "Kabupaten":"Pasaman",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SNBI",
+    "Latitude":0.963245,
+    "Longitude":97.429538,
+    "Depth":-0.004,
+    "Kecamatan":"Sirombu",
+    "Kabupaten":"Nias Barat",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"SSSM",
+    "Latitude":-1.56407,
+    "Longitude":101.23747,
+    "Depth":-0.563,
+    "Kecamatan":"Sangir",
+    "Kabupaten":"Solok Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"STSI",
+    "Latitude":-2.38874,
+    "Longitude":101.04783,
+    "Depth":-0.016,
+    "Kecamatan":"Silaut",
+    "Kabupaten":"Pesisir Selatan",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"SUSM",
+    "Latitude":-5.0212,
+    "Longitude":104.2945,
+    "Depth":-1.055,
+    "Kecamatan":"Sekincau",
+    "Kabupaten":"Lampung Barat",
+    "Provinsi":"Lampung"
+  },
+  {
+    "nama_stasiun":"TASI",
+    "Latitude":-0.3241,
+    "Longitude":100.0791,
+    "Depth":-0.025,
+    "Kecamatan":"Tanjung Raya",
+    "Kabupaten":"Agam",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"TDNI",
+    "Latitude":0.574382,
+    "Longitude":97.819617,
+    "Depth":-0.059,
+    "Kecamatan":"Teluk Dalam",
+    "Kabupaten":"Nias Selatan",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"TMSM",
+    "Latitude":-2.69954,
+    "Longitude":101.44633,
+    "Depth":-0.118,
+    "Kecamatan":"Teramang Jaya",
+    "Kabupaten":"Mukomuko",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"TNSR",
+    "Latitude":1.46933,
+    "Longitude":97.44152,
+    "Depth":0.0,
+    "Kecamatan":"Tuhemberua",
+    "Kabupaten":"Nias Utara",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"TRIYO",
+    "Latitude":-2.0601,
+    "Longitude":99.583,
+    "Depth":-0.088,
+    "Kecamatan":"Sipora Selatan",
+    "Kabupaten":"Kepulauan Mentawai",
+    "Provinsi":"Sumatera Barat"
+  },
+  {
+    "nama_stasiun":"TRSI",
+    "Latitude":2.0256,
+    "Longitude":98.9594,
+    "Depth":-0.9785,
+    "Kecamatan":"Tarutung",
+    "Kabupaten":"Tapanuli Utara",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"TTSM",
+    "Latitude":1.0856,
+    "Longitude":99.4108,
+    "Depth":-0.173,
+    "Kecamatan":"Tano Tombangan Angkola",
+    "Kabupaten":"Tapanuli Selatan",
+    "Provinsi":"Sumatera Utara"
+  },
+  {
+    "nama_stasiun":"UBSI",
+    "Latitude":-3.7611,
+    "Longitude":102.2714,
+    "Depth":-0.02805,
+    "Kecamatan":"Universitas Bengkulu",
+    "Kabupaten":"Bengkulu",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"ULSM",
+    "Latitude":-3.7588,
+    "Longitude":102.7941,
+    "Depth":-0.284,
+    "Kecamatan":"Ulu Musi",
+    "Kabupaten":"Empat Lawang",
+    "Provinsi":"Sumatera Selatan"
+  },
+  {
+    "nama_stasiun":"UMKSI",
+    "Latitude":-3.59,
+    "Longitude":102.548,
+    "Depth":-0.709,
+    "Kecamatan":"Daspetah II",
+    "Kabupaten":"Kepahiang",
+    "Provinsi":"Bengkulu"
+  },
+  {
+    "nama_stasiun":"UTSM",
+    "Latitude":-4.08339,
+    "Longitude":102.72849,
+    "Depth":-0.113,
+    "Kecamatan":"Ulu Talo",
+    "Kabupaten":"Seluma",
+    "Provinsi":"Bengkulu"
+  }
+]
