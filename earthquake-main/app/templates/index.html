@@ -1,0 +1,736 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<!-- PANEL INFORMASI GEMPA -->
+<div id="info-panel" class="info-panel-modern no-warning">
+  <div class="info-section">
+    <h2 class="title">West Sumatra EEW</h2>
+    <br><p class="subtitle" id="simulated-time" style="font-size: 14px; color: #ccc; margin-top: -10px;">Time: --</p>
+  </div>
+
+  <!-- Saat P-Wave belum mencapai stasiun terdekat -->
+  <div id="no-warning" class="info-section">
+    <p class="subtitle">No Earthquake Warning Issued</p>
+  </div>
+
+  <!-- Saat P-Wave mencapai stasiun, tapi parameter belum keluar -->
+  <div id="warning-info1" class="info-section" style="display:none;">
+    <!--<p><strong>Earthquake Detected</strong>-->
+    <p class="subtitle">⚠️ P waves detected at:</p>
+    <ul class="station-list" id="p-arrived-stations"></ul>
+    <p class="subtext">Emergency Earthquake Warning. Strong shaking is expected soon.
+    Please take immediate action to protect your safety.
+    If you are indoors, stay away from windows and take cover under sturdy furniture.
+    If you are outdoors, move away from buildings and watch for falling objects.</p>
+  </div>
+
+  <!-- Saat parameter gempa (magnitude, lokasi) ditampilkan -->
+  <div id="warning-info2" class="info-section" style="display:none;">
+    <p class="subtitle">⚠️ Earthquake Warning Active</p>
+
+    <p class="label">⏱️ Time Left</p>
+    <p class="value time" id="remaining-time">--</p>
+    <p class="subtext">📍 Distance: <span id="epicenter-distance">-- km</span></p>
+
+    <div class="row">
+      <div class="col">
+        <p class="label">📊 Exp Intensity</p>
+        <p class="value" id="intensity">{{ intensity }}</p>
+        <p class="subtext">MMI</p>
+      </div>
+      <div class="col">
+        <p class="label">Est Magnitude</p>
+        <p class="value" id="magnitude">{{ magnitude }}</p>
+        <p class="subtext">Mw</p>        
+      </div>
+    </div>
+
+    <p class="label">🕒 Origin Time</p>
+    <p class="value" id="origin-time">{{ origin_time1 }}</p>
+    <p class="subtext">Elapsed Time: <span id="elapsed-time">--</span></p>
+
+    <p class="label">🌐 Location</p>
+    <p class="value">
+      <span id="lat-lon">{{ lat }}, {{ lon }}</span> &nbsp;|&nbsp; Depth: <span id="depth">{{ depth }} km</span>
+    </p>
+    <p class="subtext">📌 <span id="location-description"><span id="relative-location"></span></span></p>
+
+  </div>
+</div>
+
+<!-- PANEL SKALA MMI -->
+<div class="mmi-panel">
+    <div class="mmi-color-bar">
+        <div class="mmi-color mmi-i"></div>
+        <div class="mmi-color mmi-ii-iii"></div>
+        <div class="mmi-color mmi-iv"></div>
+        <div class="mmi-color mmi-v"></div>
+        <div class="mmi-color mmi-vi"></div>
+        <div class="mmi-color mmi-vii"></div>
+        <div class="mmi-color mmi-viii"></div>
+        <div class="mmi-color mmi-ix"></div>
+        <div class="mmi-color mmi-x"></div>
+    </div>
+    <div class="mmi-labels">
+        <div>Not Felt</div><div>Weak</div><div>Light</div><div>Moderate</div><div>Strong</div>
+        <div>Very Strong</div><div>Severe</div><div>Violent</div><div>Extreme</div>
+    </div>
+    <div class="mmi-numbers">
+        <div>I</div><div>II-III</div><div>IV</div><div>V</div><div>VI</div>
+        <div>VII</div><div>VIII</div><div>IX</div><div>X+</div>
+    </div>
+</div>
+
+<div class="intensity-region-panel" id="region-intensity-panel" style="display:none;">
+  <div class="panel-title">Intensities</div>
+  <div class="intensity-table-header">
+    <span class="col-region">Region</span>
+    <span class="col-mmi">Pred</span>
+    <span class="col-mmi">True</span>
+  </div>
+  <ul id="region-intensity-list"></ul>
+</div>
+
+
+
+<!-- LEGEND KIRI BAWAH: P/S wave + station + fault -->
+<div class="map-legend" id="left-legend">
+    <div><b>Legend</b></div>
+    <div class="legend-item"><div class="legend-color color-p"></div> P-Wave (6 km/s)</div>
+    <div class="legend-item"><div class="legend-color color-s"></div> S-Wave (3.5 km/s)</div>
+    <div class="legend-item"><div class="legend-color color-station box"></div> Seismic Station</div>
+    <div class="legend-item"><div class="legend-line fault"></div> Fault Line</div>
+    <div class="legend-item">
+      <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"
+           width="16" style="vertical-align:middle; margin-right: 4px;"> True Epicenter
+    </div>
+    <div class="legend-item">
+      <img src="static/images/event.png"
+           width="16" style="vertical-align:middle; margin-right: 4px;"> Predicted Epicenter
+    </div>
+    <div class="legend-item">
+  <img src="static/images/location_17262907.png"
+       width="16" style="vertical-align:middle; margin-right: 4px;"> Target Location
+</div>
+
+</div>
+
+
+<div id="audio-info" style="position: fixed; top: 10px; right: 10px; background: #ffd; padding: 8px; border: 1px solid #ccc; z-index: 1000;">
+  🔊 Click anywhere to enable earthquake sound alert
+</div>
+
+
+<!-- PETA LEAFLET -->
+<div class="container" id="map" style="height: 620px; margin-top: 20px;"></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+<!--<audio id="eew-audio" preload="auto" src="{{ url_for('static', filename='sound/eew_combined_with_zedge.mp3') }}"></audio>-->
+<audio id="eew-audio" hidden>
+  <source src="{{ url_for('static', filename='sound/eew_combined_with_zedge.mp3') }}">
+Your browser does not support the audio element.
+</audio>
+
+<audio id="eew-audio1" hidden>
+  <source src="{{ url_for('static', filename='sound/Untitled_12to14.mp3') }}">
+Your browser does not support the audio element.
+</audio>
+
+<audio id="s-wave-audio" preload="auto" hidden>
+  <source src="{{ url_for('static', filename='sound/s_wave_arrival.mp3') }}">
+  Your browser does not support the audio element.
+</audio>
+
+
+<!-- JAVASCRIPT UTAMA -->
+<script>
+window.onload = function () {
+    // ================================
+    // Fungsi utilitas: Haversine distance (km)
+    // ================================
+    function haversine(lat1, lon1, lat2, lon2) {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) ** 2 +
+                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                  Math.sin(dLon / 2) ** 2;
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    function updateCurrentClock() {
+        const now = new Date();
+        const formatted = now.toISOString().replace("T", " ").slice(0, 19);
+        const clockElement = document.getElementById("clock-time");
+        if (clockElement) clockElement.innerText = formatted;
+    }
+
+    let audioInitialized = false;
+
+    document.body.addEventListener('click', function initializeAudioOnce() {
+        const audio = document.getElementById("eew-audio");
+        if (audio) {
+            audio.play().then(() => {
+                audio.pause();  // langsung dihentikan, untuk dapat izin autoplay
+                audio.currentTime = 0;
+                audioInitialized = true;
+                console.log("✅ Audio unlocked by user click");
+                const infoBox = document.getElementById("audio-info");
+                if (infoBox) infoBox.style.display = "none";
+
+            }).catch(err => {
+                console.warn("❌ Autoplay blocked until user interacts:", err);
+            });
+        }
+        document.body.removeEventListener('click', initializeAudioOnce);
+    });
+
+
+    const mmiSeries = {{ mmi_series | tojson | safe }};
+    const mmiTrueStatic = {{ mmi_true_series | tojson | safe }};
+    
+    const mmiByTime = {};
+    mmiSeries.forEach(item => {
+        const key = item.time.toFixed(1);
+        if (!mmiByTime[key]) mmiByTime[key] = [];
+        mmiByTime[key].push(item);
+    });
+
+    // Ambil semua nama station yang ada di mmi_series
+    const mmiStationSet = new Set();
+    Object.values(mmiByTime).flat().forEach(entry => {
+        mmiStationSet.add(entry.station.trim().toUpperCase());
+    });
+
+    console.log("🧪 Semua station di mmi_series:", [...mmiStationSet]);
+
+
+
+    function mmiToClass(mmi) {
+        const level = (mmi || "").toUpperCase();
+        if (level === "I") return "mmi-i";
+        if (["II", "III", "II-III"].includes(level)) return "mmi-ii-iii";
+        if (level === "IV") return "mmi-iv";
+        if (level === "V") return "mmi-v";
+        if (level === "VI") return "mmi-vi";
+        if (level === "VII") return "mmi-vii";
+        if (level === "VIII") return "mmi-viii";
+        if (level === "IX") return "mmi-ix";
+        return "mmi-x";
+    }
+
+    function mmiRankValue(mmi) {
+        const levels = ["I", "II-III", "IV", "V", "VI", "VII", "VIII", "IX", "X+"];
+        return levels.indexOf((mmi || "").toUpperCase());
+    }
+
+    function distanceToEpicenter(entry) {
+        if (!entry.lat || !entry.lon) return Infinity;
+        return haversine(epicLat, epicLon, entry.lat, entry.lon);
+    }
+
+    function updateRegionIntensityAt(t) {
+        console.log(`⏱️ Memperbarui region intensity untuk t = ${t.toFixed(1)}`);
+        const key = t.toFixed(1);
+        const pred = mmiByTime[key] || [];
+        const obs = mmiTrueStatic || [];
+
+        const list = document.getElementById("region-intensity-list");
+        list.innerHTML = "";
+
+        const combined = pred.map(p => {
+            const match = obs.find(o => o.region === p.region);
+            return {
+                region: p.region,
+                mmi_pred: p.mmi,
+                mmi_true: match ? match.mmi : null,
+                lat: p.lat,
+                lon: p.lon
+            };
+        });
+
+        combined.sort((a, b) => {
+            const rankA = mmiRankValue(a.mmi_pred);
+            const rankB = mmiRankValue(b.mmi_pred);
+            if (rankA !== rankB) return rankB - rankA;
+            return distanceToEpicenter(a) - distanceToEpicenter(b);
+        });
+
+        const top5 = combined.slice(0, 20);
+        top5.forEach(entry => {
+            const li = document.createElement("li");
+            const predClass = mmiToClass(entry.mmi_pred);
+            const trueClass = mmiToClass(entry.mmi_true);
+            li.innerHTML = `
+                <span class="col-region">${entry.region}</span>
+                <span class="col-mmi mmi-badge ${predClass}">${entry.mmi_pred || '-'}</span>
+                <span class="col-mmi mmi-badge ${trueClass}">${entry.mmi_true || '-'}</span>
+            `;
+            list.appendChild(li);
+        });
+
+        document.getElementById("region-intensity-panel").style.display = "block";
+    }
+
+    function formatElapsed(seconds) {
+        if (seconds < 60) return `${seconds}s ago`;
+        const m = Math.floor(seconds / 60);
+        if (m < 60) return `${m}m ago`;
+        const h = Math.floor(m / 60);
+        if (h < 24) return `${h}h ago`;
+        return `${Math.floor(h / 24)} days ago`;
+    }
+
+
+    function updateElapsedClockFromSim(simTimeStr) {
+        const origin = new Date(simTimeStr);
+        const elapsedSec = Math.floor((simulatedTime - origin) / 1000);
+        const elapsedElement = document.getElementById("elapsed-time");
+
+
+        if (elapsedElement) elapsedElement.innerText = formatElapsed(elapsedSec);
+        return elapsedSec;
+    }
+
+
+
+    function updateMMIOverlay(t) {
+        const match = mmiImages.find(p => Math.abs(p.time - t) <= 0.1);
+        console.log("MMI overlay t:", t, "→ match:", match);
+        console.log(mmiImages)
+
+        if (!match) return;
+
+        if (currentOverlay) {
+            map.removeLayer(currentOverlay);
+        }
+
+        currentOverlay = L.imageOverlay(match.file, match.bounds, {
+            opacity: 0.65,
+            interactive: false
+        }).addTo(map);
+    }
+
+
+    let currentMMIMarkers = [];
+    const stationMarkers = {};  // Simpan marker tiap stasiun
+
+    function updateMMIMarkers(t) {
+        let key = t.toFixed(1);
+
+        if (!mmiByTime[key]) {
+            const availableKeys = Object.keys(mmiByTime).map(parseFloat);
+            if (availableKeys.length === 0) {
+                console.warn("⚠️ Tidak ada data MMI sama sekali untuk waktu manapun!");
+                return;
+            }
+
+            const closest = availableKeys.reduce((a, b) =>
+                Math.abs(b - t) < Math.abs(a - t) ? b : a
+            );
+            key = closest.toFixed(1);
+            console.warn(`⚠️ Data MMI untuk t=${t.toFixed(1)} tidak ditemukan, pakai waktu terdekat: ${key}`);
+        }
+
+        const entries = mmiByTime[key] || [];
+        console.log(`🔁 updateMMIMarkers digunakan key=${key}, total entries=${entries.length}`);
+
+        // Hapus marker lama
+        currentMMIMarkers.forEach(m => map.removeLayer(m));
+        currentMMIMarkers = [];
+
+        // Tambahkan marker baru
+        const offset = 0.05;  // sekitar 1 km
+        entries.forEach(item => {
+            const mmiStr = item.mmi?.toString().trim().toUpperCase();
+            if (!mmiStr || mmiStr === "-" || mmiStr === "N/A") {
+                console.warn(`⛔ MMI kosong atau tidak valid untuk station ${item.station}:`, item.mmi);
+                return;
+            }
+
+            const color = getMMIColorFromCategory(mmiStr);
+            const lat = item.lat;
+            const lon = item.lon;
+
+            // Buat kotak rectangle sebagai marker MMI
+            const bounds = [
+                [lat - offset, lon - offset],
+                [lat + offset, lon + offset]
+            ];
+
+            const rect = L.rectangle(bounds, {
+                color: "#000",
+                weight: 0.5,
+                fillColor: color,
+                fillOpacity: 0.9
+            }).addTo(map);
+
+            // Label teks MMI di atas kotak
+            const label = L.divIcon({
+                className: 'mmi-label',
+                html: `<div style="font-size:10px;font-weight:bold;color:black;text-align:center;">${mmiStr}</div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+
+            const labelMarker = L.marker([lat, lon], {
+                icon: label,
+                interactive: false
+            }).addTo(map);
+
+            console.log("🎯 MMI kotak ditambahkan:", item.station, "| MMI =", mmiStr);
+            currentMMIMarkers.push(rect, labelMarker);
+        });
+    }
+
+
+
+    function getMMIColorFromCategory(mmi) {
+        const mmiColorMap = {
+            "I": "#d0f0ff",         // .mmi-i (biru muda)
+            "II": "#a0e0ff",        // .mmi-ii-iii (biru)
+            "III": "#a0e0ff",       // .mmi-ii-iii (biru)
+            "II-III": "#a0e0ff",    // .mmi-ii-iii (biru)
+            "IV": "#60f0c0",        // .mmi-iv (hijau muda)
+            "V": "#f0ff60",         // .mmi-v (hijau kekuningan)
+            "VI": "#fff060",        // .mmi-vi (kuning)
+            "VII": "#ffc040",       // .mmi-vii (oranye muda)
+            "VIII": "#ff8040",      // .mmi-viii (oranye tua)
+            "IX": "#ff4040",        // .mmi-ix (merah muda)
+            "X": "#c00000",         // .mmi-x (merah tua)
+            "X+": "#c00000"         // .mmi-x (merah tua juga)
+        };
+        return mmiColorMap[mmi] || "#d9d9d9";  // fallback abu-abu jika tidak cocok
+    }
+
+
+  
+    // ================================
+    // Data dari backend Flask
+    // ================================
+    const epicLat = {{ epicenter_lat }};
+    const epicLon = {{ epicenter_lon }};
+    const siteLat = {{ site_lat }};
+    const siteLon = {{ site_lon }};
+    const pSpeed = 6;
+    const sSpeed = 3.5;
+    const stations = {{ stations | tojson | safe }};
+    const meanMagSeries = {{ mean_mag_series | tojson | safe }};
+    const predLocSeries = {{ pred_loc_series | tojson | safe }};
+    const faults = {{ fault_line | tojson | safe }};
+    const pWaveArrivals = {{ pwave_arrival | tojson | safe }};
+    const trueEpicenter = {{ true_epicenter | tojson | safe }};
+    const mmiImages = {{ mmi_images | tojson | safe }};
+    let currentOverlay = null;
+
+
+    // Ambil waktu tiba P tercepat dari data aktual
+    const pArrivalNearestStationSec = Math.min(...pWaveArrivals.map(d => d.P_arrival_time));
+
+    // ================================
+    // Inisialisasi Peta
+    // ================================
+    const map = L.map('map').setView([siteLat, siteLon], 7);
+    //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //    maxZoom: 18, attribution: '© OpenStreetMap'
+    //}).addTo(map);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community',
+        maxZoom: 18
+    }).addTo(map);
+
+    L.geoJSON(faults, {
+        style: () => ({ color: "black", weight: 2, dashArray: '6, 4' }),
+        onEachFeature: (feature, layer) => {
+            if (feature.properties?.Nama) {
+                layer.bindPopup(`<b>${feature.properties.Nama}</b>`);
+            }
+        }
+    }).addTo(map);
+
+
+
+    stations.forEach(station => {
+        if (station.Latitude && station.Longitude) {
+            const fullStationName = station.Station || station.nama_stasiun;
+            if (!fullStationName) {
+                console.warn("❌ Station tidak punya nama:", station);
+                return;
+            }
+
+            const shortName = fullStationName.split(".").pop().trim().toUpperCase();
+
+            const lat = station.Latitude;
+            const lon = station.Longitude;
+            const offset = 0.05; // sekitar 1 km, bisa disesuaikan
+
+            const bounds = [
+                [lat - offset, lon - offset],
+                [lat + offset, lon + offset]
+            ];
+
+            const marker = L.rectangle(bounds, {
+                color: "#000",
+                weight: 1,
+                fillColor: "#FFF",
+                fillOpacity: 1.0
+            }).addTo(map).bindPopup(`<b>${station.Kabupaten || "-"} - ${station.Kecamatan || "-"}</b>`);
+
+            stationMarkers[shortName] = marker;
+        } else {
+            console.warn("❌ Station tidak lengkap:", station);
+        }
+    });
+
+
+
+    const epicIcon = L.icon({
+        iconUrl: 'static/images/event.png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+        popupAnchor: [0, -20]
+    });
+
+    const epicenterPopup = L.popup().setContent(`<b>Epicenter</b><br>Magnitude: {{ magnitude }}`);
+    const epicenterMarker = L.marker([epicLat, epicLon], { icon: epicIcon }).bindPopup(epicenterPopup);
+
+    // Marker untuk lokasi sebenarnya
+    const trueIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34]
+    });
+
+
+    const trueMarker = L.marker([trueEpicenter.lat, trueEpicenter.lon], {
+        icon: trueIcon
+    }).bindPopup(`<b>True Epicenter</b><br>Magnitude: ${trueEpicenter.mag.toFixed(2)}`);
+
+    trueMarker.addTo(map);
+
+    // ================================
+    // Target location marker (Padang)
+    // ================================
+    const padangIcon = L.icon({
+        iconUrl: 'static/images/location_17262907.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -30]
+    });
+
+    const padangMarker = L.marker([siteLat, siteLon], {
+        icon: padangIcon
+    }).bindPopup("<b>Target Location</b><br>Padang, West Sumatra");
+
+    padangMarker.addTo(map);
+
+    // ================================
+    // Variabel Simulasi
+    // ================================
+    let secondsElapsed = 0;
+    let pArrived = false;
+    let paramShown = false;
+    let stationBox = null;
+    let simulatedTime = new Date("{{ origin_time }}");
+    let pCircle = null;
+    let sCircle = null;
+    let remainingCountdown = null;
+    let lastUpdateTime = 0;
+
+    // ================================
+    // LOOP SIMULASI PER DETIK
+    // ================================
+    setInterval(() => {
+        updateCurrentClock();
+        secondsElapsed++;
+        //simulatedTime.setSeconds(simulatedTime.getSeconds() + 1);
+        simulatedTime = new Date(simulatedTime.getTime() + 1000);  // perbaikan penting!
+
+        const t = secondsElapsed - pArrivalNearestStationSec;
+        updateElapsedClockFromSim("{{ origin_time }}");
+
+        // Ambil prediksi parameter gempa pada waktu t
+        if (t >= 0) {
+            const matched = meanMagSeries.find(m => Math.abs(m.time - t) <= 0.5);
+            if (matched) {
+                const magStr = matched.value.toFixed(2);
+                document.getElementById("magnitude").innerText = magStr;
+                epicenterPopup.setContent(`<b>Epicenter</b><br>Magnitude: ${magStr}`);
+                if (epicenterMarker.isPopupOpen()) {
+                    epicenterMarker.closePopup().openPopup();
+                }
+                updateMMIOverlay(matched.time);  // ✅ PANGGIL di sini agar sinkron
+                updateRegionIntensityAt(matched.time);
+                updateMMIMarkers(matched.time);
+
+                // 🔊 Play sound at selected times
+                if ([10, 15, 22, 39].includes(Math.round(matched.time))) {
+                    const audio1 = document.getElementById("eew-audio1");
+                    if (audioInitialized && audio1) {
+                        audio1.play().catch(err => console.warn("❌ Failed to play audio1:", err));
+                    }
+                }
+
+            }
+
+            const pred = predLocSeries.find(p => Math.abs(p.time - t) <= 0.5);
+            if (pred) {
+                // Tampilkan lokasi prediksi terkini
+                document.getElementById("lat-lon").innerText = `${pred.lat.toFixed(2)}, ${pred.lon.toFixed(2)}`;
+                document.getElementById("depth").innerText = `${pred.depth.toFixed(1)} km`;
+                document.getElementById("relative-location").innerText = pred.location_description;
+                epicenterMarker.setLatLng([pred.lat, pred.lon]);
+
+                // Jika lingkaran belum dibuat, buat dulu
+                if (!pCircle) {
+                    pCircle = L.circle([pred.lat, pred.lon], {
+                        color: 'blue', fillOpacity: 0, weight: 2
+                    }).addTo(map);
+                }
+                if (!sCircle) {
+                    sCircle = L.circle([pred.lat, pred.lon], {
+                        color: 'red', fillOpacity: 0, weight: 2, dashArray: '5, 10'
+                    }).addTo(map);
+                }
+
+                // Update pusat lingkaran mengikuti prediksi terbaru
+                pCircle.setLatLng([pred.lat, pred.lon]);
+                sCircle.setLatLng([pred.lat, pred.lon]);
+
+
+                const origin = new Date("{{ origin_time }}");
+                const elapsedFromOrigin = Math.floor((simulatedTime - origin) / 1000);
+                console.log("origin:", origin);
+                console.log("elapsedFromOrigin:", elapsedFromOrigin);
+                console.log("S radius:", sSpeed * 1000 * elapsedFromOrigin);
+                console.log("P radius:", pSpeed * 1000 * elapsedFromOrigin);
+
+                pCircle.setRadius(pSpeed * 1000 * elapsedFromOrigin);
+                sCircle.setRadius(sSpeed * 1000 * elapsedFromOrigin);
+
+
+                // Hitung remaining time dan tampilkan
+                const distToSiteNow = haversine(siteLat, siteLon, pred.lat, pred.lon);
+                const s_arrival_now = distToSiteNow / sSpeed;
+                const eew_pred_time = pred.time;
+                //const newRemaining = Math.max(0, Math.round(s_arrival_now - pArrivalNearestStationSec - eew_pred_time));
+                const newRemaining = Math.max(0, Math.round((distToSiteNow - sSpeed * elapsedFromOrigin) / sSpeed));
+
+                remainingCountdown = newRemaining;
+                lastUpdateTime = secondsElapsed;
+                document.getElementById("epicenter-distance").innerText = `${distToSiteNow.toFixed(1)} km from Padang`;
+                document.getElementById("remaining-time").innerText = `${remainingCountdown} s`;
+            }
+        }
+
+        // Format waktu simulasi tampil di UI
+        const year = simulatedTime.getUTCFullYear();
+        const month = String(simulatedTime.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(simulatedTime.getUTCDate()).padStart(2, '0');
+        const hour = String(simulatedTime.getUTCHours()).padStart(2, '0');
+        const minute = String(simulatedTime.getUTCMinutes()).padStart(2, '0');
+        const second = String(simulatedTime.getUTCSeconds()).padStart(2, '0');
+        const formattedSimTimeUTC = `${year}-${month}-${day} ${hour}:${minute}:${second} UTC`;
+        document.getElementById("simulated-time").innerText = `Time: ${formattedSimTimeUTC}`;
+
+        // Saat gelombang P tiba di stasiun terdekat
+        if (secondsElapsed === Math.round(pArrivalNearestStationSec)) {
+            pArrived = true;
+            pWaveArrivals.forEach(station => {
+                if (Math.round(station.P_arrival_time) === secondsElapsed) {
+                    const list = document.getElementById("p-arrived-stations");
+                    const item = document.createElement("li");
+                    item.innerText = `${station.Kabupaten} - ${station.Kecamatan}`;
+                    list.appendChild(item);
+                }
+            });
+
+            const infoPanel = document.getElementById("info-panel");
+            infoPanel.className = "info-panel-modern warning-info1";
+            document.getElementById("no-warning").style.display = "none";
+            document.getElementById("warning-info1").style.display = "block";
+            document.getElementById("warning-info2").style.display = "none";
+            if (audioInitialized) {
+                const audio = document.getElementById("eew-audio");
+                if (audio) {
+                    audio.play().catch(err => console.warn("❌ Failed to play audio:", err));
+                }
+            }
+
+            const firstStation = pWaveArrivals[0];
+            map.setView([firstStation.Latitude, firstStation.Longitude], 7, { duration: 1 });
+            stationBox = L.rectangle([
+                [firstStation.Latitude - 0.35, firstStation.Longitude - 0.35],
+                [firstStation.Latitude + 0.35, firstStation.Longitude + 0.35]
+            ], { color: "blue", weight: 4, fillOpacity: 0 }).addTo(map);
+        }
+
+        // Setelah P tiba +1 detik, tampilkan info gempa
+        if (pArrived && !paramShown && secondsElapsed === Math.round(pArrivalNearestStationSec) + 1) {
+            paramShown = true;
+            if (stationBox) map.removeLayer(stationBox);
+
+            const infoPanel = document.getElementById("info-panel");
+            infoPanel.className = "info-panel-modern warning-info2";
+            document.getElementById("warning-info1").style.display = "none";
+            document.getElementById("warning-info2").style.display = "block";
+            
+            // Tampilkan panel intensitas
+            document.getElementById("region-intensity-panel").style.display = "block";
+            updateRegionIntensityAt(t);  // pertama kali isi panel
+
+            map.flyTo([epicLat, epicLon], 7, { duration: 0.5 });
+            epicenterMarker.addTo(map).openPopup();
+
+            updateMMIOverlay(t);     // ← PANGGIL di sini juga
+
+
+
+        }
+
+        // Countdown manual remaining time setiap detik
+        if (remainingCountdown !== null && secondsElapsed > lastUpdateTime && remainingCountdown > 0) {
+            remainingCountdown -= 1;
+            document.getElementById("remaining-time").innerText = `${remainingCountdown} s`;
+
+            // 🔊 Mainkan suara saat warning time = 0 (S-wave tiba di target)
+            if (remainingCountdown === 0) {
+                const sAudio = document.getElementById("s-wave-audio");
+                if (audioInitialized && sAudio) {
+                    sAudio.play().catch(err => console.warn("❌ Failed to play S-wave audio:", err));
+                }
+            }            
+        }
+
+        // ================================
+        // Update radius lingkaran P dan S setiap detik
+        // ================================
+        if (pCircle && sCircle) {
+            const origin = new Date("{{ origin_time }}".replace(" ", "T").replace(" UTC", "Z"));
+            const elapsedFromOrigin = Math.floor((simulatedTime - origin) / 1000);
+            const pRadiusNow = pSpeed * 1000 * elapsedFromOrigin;
+            const sRadiusNow = sSpeed * 1000 * elapsedFromOrigin;
+
+            pCircle.setRadius(pRadiusNow);
+            sCircle.setRadius(sRadiusNow);
+
+            console.log("Tick update radius:");
+            console.log("  Elapsed:", elapsedFromOrigin, "s");
+            console.log("  P radius:", pRadiusNow, "m");
+            console.log("  S radius:", sRadiusNow, "m");
+        }
+
+    }, 1000); // interval tiap detik
+};
+</script>
+
+
+
+{% endblock %}
+
